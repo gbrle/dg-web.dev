@@ -1,25 +1,14 @@
 <script>
+import Header from "../components/Header.vue";
 export default {
-    data() {
-        return {
-            name: '',
-            hello: ''
-        }
-    },
-    methods: {
-        refreshHello() {
-            if (this.name) {
-                fetch("/api/helloword/" + this.name, {"method": "GET"})
-                    .then(response => response.json())
-                    .then(result => this.hello = result);
-            }
-        }
-    }
+    components: {Header}
+
 }
 </script>
 
 <template>
-    <input type="text" v-model="name">
-    <button @click="refreshHello">Demander un bonjour !</button>
-    <h1 v-show="!!hello">{{ hello }}</h1>
+    <div>
+        <Header></Header>
+        <router-view></router-view>
+    </div>
 </template>

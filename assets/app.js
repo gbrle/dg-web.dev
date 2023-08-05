@@ -9,5 +9,17 @@
 import './styles/app.css';
 import { createApp } from 'vue';
 import App from './js/App.vue';
+import { createRouter, createWebHistory } from 'vue-router';
 
-createApp(App).mount('#vue-app');
+import Home from './components/Home.vue';
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes: [
+        { path: '/page/home', component: Home },
+    ],
+});
+
+const app = createApp(App);
+app.use(router);
+app.mount('#vue-app');
