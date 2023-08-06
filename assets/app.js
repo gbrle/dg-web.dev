@@ -10,6 +10,8 @@ import './styles/app.css';
 import { createApp } from 'vue';
 import App from './js/App.vue';
 import { createRouter, createWebHistory } from 'vue-router';
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap"
 
 import Home from './js/components/Home.vue';
 
