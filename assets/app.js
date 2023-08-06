@@ -18,6 +18,7 @@ const router = createRouter({
     routes: [
         { path: '/page/home', component: Home },
     ],
+    mode: 'history',
 });
 
 const app = createApp(App);
