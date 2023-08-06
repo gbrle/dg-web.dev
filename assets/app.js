@@ -11,7 +11,7 @@ import { createApp } from 'vue';
 import App from './js/App.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
-import Home from './components/Home.vue';
+import Home from './js/components/Home.vue';
 
 const router = createRouter({
     history: createWebHistory(),
