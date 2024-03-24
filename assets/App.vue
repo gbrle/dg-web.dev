@@ -1,9 +1,6 @@
-<script>
-import Header from "./components/Header";
-export default {
-    components: {Header}
+<script setup lang="ts">
+import Header from "@/component/Header.vue";
 
-}
 </script>
 
 <template>
