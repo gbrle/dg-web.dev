@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LoaderComponent from '@/component/loader/LoaderComponent.vue'
+import LoaderComponent from '@/components/loader/LoaderComponent.vue'
 
 defineProps({
     loading: {

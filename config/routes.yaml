@@ -1,5 +1,17 @@
-controllers:
+api:
     resource:
-        path: ../src/Controller/
-        namespace: App\Controller
+        path: ../src/Controller/api
+        namespace: App\Controller\api
+    prefix: '/api'
+    name_prefix: 'api_'
     type: attribute
+
+entry_point:
+    path: /
+    controller: App\Controller\EntryPointController::loadAppAction
+
+app:
+    path: /{route}
+    controller: App\Controller\EntryPointController::loadAppAction
+    requirements:
+        route: '^.+'
