@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+ .scrollbar__thumb {
+     background-color: #AF5A47!important;
+     width: 7px!important;
+     border-radius: 0!important;
+ }

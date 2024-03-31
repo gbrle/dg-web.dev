@@ -4,6 +4,9 @@ import App from './App.vue';
 import router from './router'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
+import CustomScrollbar from 'custom-vue-scrollbar';
+import 'custom-vue-scrollbar/dist/style.css';
+import 'animate.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -19,7 +22,12 @@ import {
     faMapLocationDot,
     faList,
     faXmark,
-    faHouseFlag
+    faHouseFlag,
+    faArrowsToEye,
+    faBars,
+    faArrowsLeftRight,
+    faSquareCaretLeft,
+    faSquareCaretRight
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -33,10 +41,22 @@ library.add(
     faMapLocationDot,
     faList,
     faXmark,
-    faHouseFlag
+    faHouseFlag,
+    faArrowsToEye,
+    faBars,
+    faArrowsLeftRight,
+    faSquareCaretLeft,
+    faSquareCaretRight,
 )
 const app = createApp(App);
 
 app.use(router);
 app.mount('#vue-app');
+app.component(CustomScrollbar.name, CustomScrollbar);
 app.component('font-awesome-icon', FontAwesomeIcon)
+
+declare module 'vue' {
+    export interface GlobalComponents {
+        CustomScrollbar: typeof CustomScrollbar;
+    }
+}

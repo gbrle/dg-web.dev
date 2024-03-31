@@ -5,14 +5,15 @@ import SideBarDropdownComponent from '@/components/sideBar/SideBarDropdownCompon
 </script>
 
 <template>
-    <SideBarContainerComponent>
-        <SideBarDropdownComponent libelle="Notes" icon="gear">
-            <SideBarItemComponent
-                routeName="notes"
-                libelle="Notes"
-                icon="users-gear"
-                class="ml-3"
-            />
-        </SideBarDropdownComponent>
-    </SideBarContainerComponent>
+    <custom-scrollbar>
+        <SideBarContainerComponent>
+            <SideBarDropdownComponent libelle="Notes" icon="gear">
+                <SideBarItemComponent
+                    routeName="notes"
+                    libelle="Notes"
+                    icon="users-gear"
+                />
+            </SideBarDropdownComponent>
+        </SideBarContainerComponent>
+    </custom-scrollbar>
 </template>

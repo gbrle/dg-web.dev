@@ -24,7 +24,7 @@ const toggleDropdown = () => {
         >
       <span>
         <font-awesome-icon
-            class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
+            class="w-5 h-5 transition duration-75 group-hover:text-gray-900"
             :icon="['fas', icon]"
         />
         <span class="ml-3"> {{ libelle }} </span>
@@ -32,12 +32,12 @@ const toggleDropdown = () => {
             <slot name="arrow-icon" :toggle-dropdown="toggleDropdown">
                 <font-awesome-icon
                     v-if="isOpen"
-                    class="w-4 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
+                    class="w-4 h-5 transition duration-75 group-hover:text-gray-900"
                     :icon="['fas', 'chevron-up']"
                 />
                 <font-awesome-icon
                     v-else
-                    class="w-4 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
+                    class="w-4 h-5 transition duration-75 group-hover:text-gray-900"
                     :icon="['fas', 'chevron-down']"
                 />
             </slot>
