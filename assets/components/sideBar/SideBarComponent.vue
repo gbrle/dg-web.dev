@@ -7,10 +7,10 @@ import SideBarDropdownComponent from '@/components/sideBar/SideBarDropdownCompon
 <template>
     <custom-scrollbar>
         <SideBarContainerComponent>
-            <SideBarDropdownComponent libelle="Notes" icon="gear">
+            <SideBarDropdownComponent libelle="Daily stand up notes" icon="gear">
                 <SideBarItemComponent
-                    routeName="notes"
-                    libelle="Notes"
+                    routeName="daily-stand-up-note-creation"
+                    libelle="Créer une note"
                     icon="users-gear"
                 />
             </SideBarDropdownComponent>

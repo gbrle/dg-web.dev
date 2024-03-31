@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import Note from '@/views/Note/Note.vue';
+import DailyStandUpNoteCreationView from "@/views/DailyStandUpNote/DailyStandUpNoteCreationView.vue";
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: '/notes',
-            name: 'notes',
-            component: Note
+            path: '/daily-stand-up-note/creation',
+            name: 'daily-stand-up-note-creation',
+            component: DailyStandUpNoteCreationView,
         },
     ],
 });

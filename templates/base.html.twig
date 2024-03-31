@@ -11,6 +11,10 @@
         {% endblock %}
 
         {% block javascripts %}
+            <script>
+                const APP_URL_API = '{{ appUrlApi }}'
+            </script>
+
             {{ vite_entry_script_tags('app') }}
         {% endblock %}
     </head>

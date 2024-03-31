@@ -27,7 +27,7 @@ const onInput = (event: Event) => {
 </script>
 
 <template>
-    <div :class="`col-span-${span}`">
+    <div :class="`col-12 col-md-${span}`">
         <label v-if="label" :class="labelClasses"> {{ label }}</label>
         <input type="text" :value="modelValue" @input="onInput" :class="inputClasses" required />
         <FormErrorComponent v-if="errors" :errors="errors" />

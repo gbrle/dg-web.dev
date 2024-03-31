@@ -7,10 +7,10 @@ import "bootstrap"
 import CustomScrollbar from 'custom-vue-scrollbar';
 import 'custom-vue-scrollbar/dist/style.css';
 import 'animate.css';
-
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
+import Vue3Toastify from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 import {
     faTableColumns,
     faPowerOff,
@@ -51,6 +51,9 @@ library.add(
 const app = createApp(App);
 
 app.use(router);
+app.use(Vue3Toastify, {
+    autoClose: 3000
+} as any)
 app.mount('#vue-app');
 app.component(CustomScrollbar.name, CustomScrollbar);
 app.component('font-awesome-icon', FontAwesomeIcon)

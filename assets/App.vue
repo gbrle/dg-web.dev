@@ -5,7 +5,11 @@ import SideBarComponent from '@/components/sideBar/SideBarComponent.vue'
 import LayoutContainer from '@/components/layout/LayoutContainer.vue'
 
 const topBar = ref(null)
+const sideBar = ref(null)
+const layout = ref(null)
+
 const reactiveHeightOfLayout = ref(0)
+const reactiveWidthOfLayout = ref(0)
 const isHoverMenu = ref(false);
 
 const assignHeightOfSideBarAndLayout = () => {
@@ -15,10 +19,17 @@ const assignHeightOfSideBarAndLayout = () => {
     reactiveHeightOfLayout.value = widowHeight - topBarHeight;
 }
 
+const assignMinWidthOfLayout = () => {
+    const widowWidth = window.innerWidth
+    reactiveWidthOfLayout.value = (widowWidth - 38);
+}
+
 onMounted(() => {
     assignHeightOfSideBarAndLayout()
+    assignMinWidthOfLayout()
     window.addEventListener('resize', () => {
         assignHeightOfSideBarAndLayout()
+        assignMinWidthOfLayout()
     });
 })
 
@@ -29,12 +40,22 @@ onUnmounted(() => {
 
 <template>
     <div class="flex-row mh-100">
-    <TopBarComponent ref="topBar" class="flex align-items-center h-[8rem]"/>
+    <TopBarComponent
+        ref="topBar"
+        class="flex align-items-center h-[8rem]"
+    />
         <div class="flex">
             <SideBarComponent
+                ref="sideBar"
                 id="side-bar"
-                @mouseover="isHoverMenu = true"
-                @mouseleave="isHoverMenu = false"
+                @mouseover="() => {
+                    isHoverMenu = true
+                    assignMinWidthOfLayout()
+                }"
+                @mouseleave="() => {
+                    isHoverMenu = false
+                    assignMinWidthOfLayout()
+                }"
                 class="overflow-y-scroll pr-4 border-end"
                 :style="{
                     transition: `${0.2}s`,
@@ -43,10 +64,12 @@ onUnmounted(() => {
                 }"
             />
             <LayoutContainer
+                ref="layout"
                 id="layout-container"
-                class="overflow-y-scroll pl-10 pr-10 pl-7 pt-3 pb-3 w-100"
+                class="overflow-y-scroll pl-10 pr-[30px] pl-7 pt-3"
                 :style="{
                     height: `${reactiveHeightOfLayout}px`,
+                    width: `${reactiveWidthOfLayout}px`,
                     opacity: `${isHoverMenu ? 0.3 : 1}`,
                     position: `${isHoverMenu ? 'fixed' : 'relative'}`
                 }"
