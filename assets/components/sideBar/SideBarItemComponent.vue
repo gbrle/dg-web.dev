@@ -15,7 +15,7 @@ defineProps({
             class="flex items-center p-2 text-base text-dark rounded-lg hover:bg-gray-100 group no-underline"
         >
             <font-awesome-icon
-                class="w-5 h-5 text-dark transition duration-75 group-hover:text-gray-900"
+                class="w-3 h-3 text-dark transition duration-75 group-hover:text-gray-900"
                 :icon="['fas', icon]"
             />
             <span class="ml-3">{{ libelle }}</span>

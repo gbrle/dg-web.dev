@@ -27,7 +27,9 @@ import {
     faBars,
     faArrowsLeftRight,
     faSquareCaretLeft,
-    faSquareCaretRight
+    faSquareCaretRight,
+    faChevronRight,
+    faBook
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -47,6 +49,8 @@ library.add(
     faArrowsLeftRight,
     faSquareCaretLeft,
     faSquareCaretRight,
+    faChevronRight,
+    faBook
 )
 const app = createApp(App);
 

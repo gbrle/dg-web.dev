@@ -10,6 +10,7 @@ import { toast } from 'vue3-toastify'
 import FormGroupComponent from '@/components/form/FormGroupComponent.vue'
 import FormSectionTitleComponent from '@/components/form/FormSectionTitleComponent.vue'
 import InputComponent from "@/components/form/InputComponent.vue";
+import TextAreaComponent from "@/components/form/TextAreaComponent.vue";
 
 const dailyStandUpNote = ref<DailyStandUpNote>(new DailyStandUpNote(null))
 const errors = ref<Errors>({})
@@ -41,11 +42,11 @@ const formSubmitted = () => {
                 label="Titre"
                 span="4"
             />
-            <InputComponent
+            <TextAreaComponent
                 v-model="dailyStandUpNote.content"
                 :errors="errors.content"
                 label="Description"
-                span="4"
+                span="5"
             />
         </FormGroupComponent>
     </FormComponent>

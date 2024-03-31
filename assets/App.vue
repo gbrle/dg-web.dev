@@ -21,7 +21,7 @@ const assignHeightOfSideBarAndLayout = () => {
 
 const assignMinWidthOfLayout = () => {
     const widowWidth = window.innerWidth
-    reactiveWidthOfLayout.value = (widowWidth - 38);
+    reactiveWidthOfLayout.value = (widowWidth - 51);
 }
 
 onMounted(() => {
@@ -60,7 +60,7 @@ onUnmounted(() => {
                 :style="{
                     transition: `${0.2}s`,
                     height: `${reactiveHeightOfLayout}px`,
-                    width: `${isHoverMenu ? 262 : 38}px`
+                    width: `${isHoverMenu ? 262 : 51}px`
                 }"
             />
             <LayoutContainer
@@ -71,7 +71,7 @@ onUnmounted(() => {
                     height: `${reactiveHeightOfLayout}px`,
                     width: `${reactiveWidthOfLayout}px`,
                     opacity: `${isHoverMenu ? 0.3 : 1}`,
-                    position: `${isHoverMenu ? 'fixed' : 'relative'}`
+                    position: `${isHoverMenu ? 'fixed' : 'relative'}`,
                 }"
             >
                 <RouterView></RouterView>

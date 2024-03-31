@@ -18,17 +18,17 @@ const toggleDropdown = () => {
     <li class="overflow-hidden">
         <button
             type="button"
-            class="flex justify-between w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 z-10"
+            class="flex align-items-center justify-between w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 z-10"
             aria-controls="dropdown-content"
             @click="toggleDropdown"
         >
-      <span>
-        <font-awesome-icon
-            class="w-5 h-5 transition duration-75 group-hover:text-gray-900"
-            :icon="['fas', icon]"
-        />
-        <span class="ml-3"> {{ libelle }} </span>
-      </span>
+            <span class="flex align-items-center">
+                <font-awesome-icon
+                    class="w-9 h-9 transition duration-75 group-hover:text-gray-900"
+                    :icon="['fas', icon]"
+                />
+                <span class="ml-3 fw-bold"> {{ libelle }} </span>
+            </span>
             <slot name="arrow-icon" :toggle-dropdown="toggleDropdown">
                 <font-awesome-icon
                     v-if="isOpen"
@@ -42,7 +42,7 @@ const toggleDropdown = () => {
                 />
             </slot>
         </button>
-        <ul v-if="isOpen" class="z-20 w-full py-2 overflow-hidden text-base">
+        <ul v-if="isOpen" class="z-20 pl-12 w-full overflow-hidden text-base">
             <slot></slot>
         </ul>
     </li>

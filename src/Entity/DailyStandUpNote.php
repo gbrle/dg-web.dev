@@ -2,13 +2,17 @@
 
 namespace App\Entity;
 
+use App\Component\Metadata\Metadata;
+use App\Component\Metadata\MetadataInterface;
 use App\Repository\DailyStandUpNoteRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DailyStandUpNoteRepository::class)]
-class DailyStandUpNote
+class DailyStandUpNote implements MetadataInterface
 {
+    use Metadata;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
