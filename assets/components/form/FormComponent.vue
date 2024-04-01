@@ -1,7 +1,11 @@
 <script setup lang="ts">
-defineProps({
+const props = defineProps({
     submitLabel: {
         type: String
+    },
+    item: {
+        type: Object,
+        required: false
     }
 })
 
@@ -9,6 +13,7 @@ const emit = defineEmits(['submit'])
 
 const submit = () => {
     emit('submit')
+    if (props.item) emit('item', item)
 }
 </script>
 

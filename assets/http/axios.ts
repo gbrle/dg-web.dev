@@ -1,10 +1,21 @@
 import axios from 'axios'
 import { toast } from 'vue3-toastify'
+import { useUtilisateurStore } from '@/stores/utilisateur'
 import router from '@/router'
 
 const instance = axios.create({
     baseURL: APP_URL_API
 })
+
+instance.interceptors.request.use(request => {
+    let token = localStorage.getItem('token')
+
+    if (token) {
+        request.headers.Authorization = `Bearer ${token}`
+    }
+
+    return request
+});
 
 instance.interceptors.response.use(
     (response) => {
@@ -17,6 +28,7 @@ instance.interceptors.response.use(
             } else {
                 toast.error(error.response.data.message)
 
+                const userStore = useUtilisateurStore()
                 switch (error.response.status) {
                     case 404:
                         setTimeout(() => router.push({ name: 'tableau-de-bord' }), 2000)
@@ -26,6 +38,7 @@ instance.interceptors.response.use(
                     case 400:
                         return Promise.reject(error)
                     case 401:
+                        userStore.logout()
                         setTimeout(() => {
                             router.push({ name: 'connexion' })
                         }, 2000)
