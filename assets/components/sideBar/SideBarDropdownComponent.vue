@@ -42,8 +42,14 @@ const toggleDropdown = () => {
                 />
             </slot>
         </button>
-        <ul v-if="isOpen" class="z-20 pl-12 w-full overflow-hidden text-base">
+        <ul v-if="isOpen" class="z-20 pl-12 w-full overflow-hidden text-base animate__animated animate__backInLeft">
             <slot></slot>
         </ul>
     </li>
 </template>
+
+<style scoped>
+.animate__animated.animate__backInLeft {
+    --animate-duration: 0.400s;
+}
+</style>

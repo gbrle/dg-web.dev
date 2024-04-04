@@ -23,6 +23,7 @@ let login = async (credentials) => {
         .then(response => {
             localStorage.setItem('token', response.data.token)
             utilisateurStore.loadUtilisateur()
+            router.push({ name: 'connexion' })
             router.push({ name: 'home' })
         })
         .catch(error => {
@@ -50,7 +51,10 @@ const formSubmitted = (utilisateur: Utilisateur) => {
             >
         </div>
         <div class="container col-12 col-md-4 col-xl-3 flex flex-column">
-            <FormComponent @submit="formSubmitted(utilisateur)" submit-label="Connexion">
+            <FormComponent
+                @submit="formSubmitted(utilisateur)" submit-label="Connexion"
+                :isSubmitKeyUpEnter="true"
+            >
                 <FormGroupComponent>
                     <EmailComponent
                         class="text-center"

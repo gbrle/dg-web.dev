@@ -32,7 +32,7 @@ const formSubmitted = () => {
 }
 
 </script>
-<template>
+<template >
     <FormComponent @submit="formSubmitted" submit-label="Créer la note">
         <FormSectionTitleComponent title="Création d'une note daily stand up" />
         <FormGroupComponent>

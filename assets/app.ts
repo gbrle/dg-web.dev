@@ -31,7 +31,10 @@ import {
     faSquareCaretLeft,
     faSquareCaretRight,
     faChevronRight,
-    faBook
+    faBook,
+    faUser,
+    faRightFromBracket,
+    faPlus
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -52,7 +55,10 @@ library.add(
     faSquareCaretLeft,
     faSquareCaretRight,
     faChevronRight,
-    faBook
+    faBook,
+    faUser,
+    faRightFromBracket,
+    faPlus
 )
 const app = createApp(App);
 

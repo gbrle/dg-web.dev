@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import TopBarContainerComponent from '@/components/topBar/TopBarContainerComponent.vue'
-import TopBarLogoComponent from '@/components/topBar/TopBarLogoComponent.vue'
-import TopBarLeftItemComponent from '@/components/topBar/TopBarLeftItemComponent.vue'
-import TopBarRightItemComponent from '@/components/topBar/TopBarRightItemComponent.vue'
+import fullLogo from '@/images/dg-web-animated.svg'
 </script>
 
 <template>
-    <TopBarContainerComponent>
-        <TopBarLeftItemComponent>
-            <TopBarLogoComponent />
-        </TopBarLeftItemComponent>
-        <TopBarRightItemComponent>
-        </TopBarRightItemComponent>
-    </TopBarContainerComponent>
+
+    <nav class="border-b border-gray-200">
+        <div class="p-2">
+                <div class="flex items-center justify-content-between">
+                    <div class="pl-7">
+                        <router-link to="/home">
+                            <img :src="fullLogo" class="h-[100px] mr-3" alt="DG WEB Logo" />
+                        </router-link>
+                    </div>
+                </div>
+        </div>
+    </nav>
 </template>
