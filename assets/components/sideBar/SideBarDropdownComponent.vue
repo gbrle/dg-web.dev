@@ -1,16 +1,27 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-defineProps({
+const props = defineProps({
     libelle: String,
-    icon: String
+    icon: String,
+    isOpenProp: Boolean,
 })
 
 const isOpen = ref(false)
+const emit = defineEmits(['closeOtherDropdowns'])
+
+// Lorsque la prop isOpenProp change, mettez à jour l'état de ce menu déroulant
+watch(() => props.isOpenProp, (newValue) => {
+    isOpen.value = newValue
+})
 
 const toggleDropdown = () => {
     isOpen.value = !isOpen.value
+    // Fermez tous les autres menu déroulants
+    if (isOpen.value) {
+        emit('closeOtherDropdowns')
+    }
 }
 </script>
 
