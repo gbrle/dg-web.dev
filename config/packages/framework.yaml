@@ -2,7 +2,6 @@
 framework:
     secret: '%env(APP_SECRET)%'
     #csrf_protection: true
-    http_method_override: false
     handle_all_throwables: true
 
     # Enables session support. Note that the session will ONLY be started if you read or write from it.
@@ -11,12 +10,17 @@ framework:
         handler_id: null
         cookie_secure: auto
         cookie_samesite: lax
-        storage_factory_id: session.storage.factory.native
 
     #esi: true
     #fragments: true
     php_errors:
         log: true
+
+when@dev:
+    framework:
+        # il faudra peut-être le mettre sous tous les environment. Cela règle le problème de https avec le profiler
+        # https://github.com/symfony/symfony/issues/37980#issuecomment-910034522
+        trusted_proxies: '127.0.0.1,REMOTE_ADDR'
 
 when@test:
     framework:
