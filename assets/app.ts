@@ -13,6 +13,9 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Vue3Toastify from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
+import Vue3EasyDataTable from 'vue3-easy-data-table'
+import 'vue3-easy-data-table/dist/style.css';
+
 import {
     faTableColumns,
     faPowerOff,
@@ -72,6 +75,7 @@ app.use(Vue3Toastify, {
 app.mount('#vue-app');
 app.component(CustomScrollbar.name, CustomScrollbar);
 app.component('font-awesome-icon', FontAwesomeIcon)
+app.component('EasyDataTable', Vue3EasyDataTable)
 
 declare module 'vue' {
     export interface GlobalComponents {

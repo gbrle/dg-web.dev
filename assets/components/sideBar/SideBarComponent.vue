@@ -44,6 +44,11 @@ const closeOtherDropdowns = (selectedDropdown) => {
                     libelle="Créer un utilisateur"
                     icon="fa-plus"
                 />
+                <SideBarItemComponent
+                    routeName="utilisateurs-liste"
+                    libelle="Liste des utilisateurs"
+                    icon="fa-list"
+                />
                 <a class="no-underline" href="/api/logout" @click="logout">
                     <SideBarItemComponent
                         libelle="Se déconnecter"

@@ -35,7 +35,7 @@ class UtilisateurController extends AbstractController
     #[Route('/utilisateurs', name: 'list_utilisateurs', methods: ['get'])]
     public function getUtilisateurs(): Response
     {
-        $utilisateurs = $this->utilisateurService->fetchAllUtilisateurs();
+        $utilisateurs = $this->utilisateurManager->fetchAllUtilisateurs();
 
         return new Response($this->jsonSerializer->serialize($utilisateurs, ['read']));
     }

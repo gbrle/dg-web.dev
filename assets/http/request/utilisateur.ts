@@ -26,7 +26,7 @@ export const createUtilisateur = async (utilisateur: Utilisateur): Promise<Array
 }
 export const getUtilisateurs = async (): Promise<Array<Utilisateur>> => {
     const response = await axios.get('/utilisateurs')
-
+console.log(response.data)
     return response.data.map((utilisateursData: Utilisateur) => new Utilisateur(utilisateursData))
 }
 export const patchUtilisateur = async (utilisateur: Utilisateur): Promise<Utilisateur> => {

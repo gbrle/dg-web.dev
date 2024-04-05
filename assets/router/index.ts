@@ -4,6 +4,7 @@ import Home from "@/views/Home.vue";
 import ConnexionView from "@/views/ConnexionView.vue";
 import DailyStandUpNoteCreationView from "@/views/DailyStandUpNote/DailyStandUpNoteCreationView.vue";
 import UtilisateurCreationView from "@/views/Utilisateur/UtilisateurCreationView.vue";
+import UtilisateurListeView  from "@/views/Utilisateur/UtilisateurListeView.vue";
 import DashBoardView from "@/views/DashBoardView.vue";
 
 const router = createRouter({
@@ -37,6 +38,12 @@ const router = createRouter({
             path: '/utilisateurs/creation',
             name: 'utilisateurs-creation',
             component: UtilisateurCreationView,
+            meta: { requiresAuth: true }
+        },
+        {
+            path: '/utilisateurs/liste',
+            name: 'utilisateurs-liste',
+            component: UtilisateurListeView,
             meta: { requiresAuth: true }
         },
     ],
