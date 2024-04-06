@@ -23,9 +23,7 @@ onMounted(() => {
     })
 })
 const updateUtilisateur = (item: Utilisateur) => {
-    console.log(item)
-    utilisateurs.value[utilisateurs.value.findIndex((utilisateur) => utilisateur.id === item.id)] =
-        item
+    utilisateurs.value[utilisateurs.value.findIndex((utilisateur) => utilisateur.id === item.id)] = item
 
     patchUtilisateur(item)
         .then(() => {

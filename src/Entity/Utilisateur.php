@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\Role;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -22,8 +23,8 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[Groups(['read'])]
-    #[ORM\Column]
-    private array $roles = [];
+    #[ORM\Column(type: 'string', enumType: Role::class)]
+    private Role $role;
 
     /**
      * @var string The hashed password
@@ -48,6 +49,23 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getRole(): Role
+    {
+        return $this->role;
+    }
+
+    public function getRoles(): array
+    {
+        return [$this->role->value, 'ROLE_USER'];
+    }
+
+    public function setRole(Role $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
     /**
      * A visual identifier that represents this user.
      *
@@ -56,25 +74,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): static
-    {
-        $this->roles = $roles;
-
-        return $this;
     }
 
     /**

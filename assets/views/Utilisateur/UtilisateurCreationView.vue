@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import {onMounted, ref} from 'vue'
 import FormComponent from '@/components/form/FormComponent.vue'
 import { Utilisateur } from '@/model/utilisateur'
 import { type Errors } from '@/model/errors'
@@ -10,8 +10,10 @@ import { toast } from 'vue3-toastify'
 import FormGroupComponent from '@/components/form/FormGroupComponent.vue'
 import FormSectionTitleComponent from '@/components/form/FormSectionTitleComponent.vue'
 import InputComponent from "@/components/form/InputComponent.vue";
+import SelectComponent from "@/components/form/SelectComponent.vue";
 
 const utilisateur = ref<Utilisateur>(new Utilisateur(null))
+import { RolesLibelle } from '@/model/enum/utilisateur/role'
 const errors = ref<Errors>({})
 
 const formSubmitted = () => {
@@ -46,6 +48,13 @@ const formSubmitted = () => {
                 :errors="errors.password"
                 label="Mot de passe"
                 span="4"
+            />
+            <SelectComponent
+                v-model="utilisateur.role"
+                :errors="errors.role"
+                label="Role"
+                span="3"
+                :choicesEnum="RolesLibelle"
             />
         </FormGroupComponent>
     </FormComponent>

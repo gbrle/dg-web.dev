@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\api;
 
+use App\Enum\Role;
 use App\Form\Utilisateur\CreateUtilisateurFormType;
 use App\Form\Utilisateur\EditionUtilisateurFormType;
 use App\Response\FormErrorResponse;
@@ -44,6 +45,7 @@ class UtilisateurController extends AbstractController
     public function postUtilisateur(
         ManagerRegistry $doctrine, Request $request, UserPasswordHasherInterface $passwordHasher
     ): Response {
+
         $form = $this
             ->createForm(CreateUtilisateurFormType::class)
             ->submit(json_decode($request->getContent(), true))
@@ -57,6 +59,7 @@ class UtilisateurController extends AbstractController
         $decoded = json_decode($request->getContent());
 
         $email = $decoded->email;
+        $role = $decoded->role;
         $plaintextPassword = $decoded->password;
 
         $user = new Utilisateur();
@@ -66,7 +69,7 @@ class UtilisateurController extends AbstractController
         );
         $user->setPassword($hashedPassword);
         $user->setEmail($email);
-        $user->setRoles(['ROLE_ADMIN']);
+        $user->setRole(Role::getRole($role));
         $em->persist($user);
         $em->flush();
 

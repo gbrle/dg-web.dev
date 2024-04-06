@@ -47,7 +47,7 @@ const clearSelection = () => {
 </script>
 
 <template>
-    <div :class="`col-span-${span} relative`">
+    <div :class="`col-12 col-md-${span} relative`">
         <label v-if="label" :class="labelClasses"> {{ label }}</label>
         <select v-if="choices" :class="inputClasses" :value="modelValue" @input="onInput">
             <option v-for="choice in choices" :key="choice.getKey()" :value="choice.getKey()">
