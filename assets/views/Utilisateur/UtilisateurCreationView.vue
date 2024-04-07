@@ -56,6 +56,11 @@ const formSubmitted = () => {
                 span="3"
                 :choicesEnum="RolesLibelle"
             />
+            <v-select
+                label="Select"
+                :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+            ></v-select>
+            <v-icon>mdi-home</v-icon>
         </FormGroupComponent>
     </FormComponent>
 </template>

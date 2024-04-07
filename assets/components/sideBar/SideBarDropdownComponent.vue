@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 const props = defineProps({
     libelle: String,
@@ -34,23 +33,11 @@ const toggleDropdown = () => {
             @click="toggleDropdown"
         >
             <span class="flex align-items-center">
-                <font-awesome-icon
-                    class="w-9 h-9 transition duration-75 group-hover:text-gray-900"
-                    :icon="['fas', icon]"
-                />
+                <v-icon>mdi-home</v-icon>
                 <span class="ml-3 fw-bold"> {{ libelle }} </span>
             </span>
             <slot name="arrow-icon" :toggle-dropdown="toggleDropdown">
-                <font-awesome-icon
-                    v-if="isOpen"
-                    class="w-4 h-5 transition duration-75 group-hover:text-gray-900"
-                    :icon="['fas', 'chevron-up']"
-                />
-                <font-awesome-icon
-                    v-else
-                    class="w-4 h-5 transition duration-75 group-hover:text-gray-900"
-                    :icon="['fas', 'chevron-down']"
-                />
+                <v-icon>mdi-home</v-icon>
             </slot>
         </button>
         <ul v-if="isOpen" class="z-20 pl-12 w-full overflow-hidden text-base animate__animated animate__backInLeft">

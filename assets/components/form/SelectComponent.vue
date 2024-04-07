@@ -3,7 +3,6 @@ import { useInputClasses } from '@/composables/form/useInputClasses'
 import FormErrorComponent from '@/components/form/FormErrorComponent.vue'
 import { computed, type PropType } from 'vue'
 import type { SelectableInterface } from '@/model/selectableInterface'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 const props = defineProps({
     modelValue: {
@@ -71,10 +70,7 @@ const clearSelection = () => {
             type="button"
             @click="clearSelection"
         >
-            <font-awesome-icon
-                class="w-4 h-4 text-gray-400 transition duration-75 group-hover:text-gray-900 font-light"
-                :icon="['fas', 'xmark']"
-            />
+            <v-icon>mdi-home</v-icon>
         </button>
         <FormErrorComponent v-if="errors" :errors="errors" />
     </div>

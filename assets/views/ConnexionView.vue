@@ -1,21 +1,20 @@
 <script setup lang="ts">
-import FormComponent from '@/components/form/FormComponent.vue'
-import FormGroupComponent from '@/components/form/FormGroupComponent.vue'
-import {ref} from "vue";
+import { ref } from "vue";
 import router from '@/router'
 import { Utilisateur } from "@/model/utilisateur";
 import { useUtilisateurStore } from '@/stores/utilisateur'
-import PasswordComponent from "@/components/form/PasswordComponent.vue";
-import EmailComponent from "@/components/form/EmailComponent.vue";
 import axios from '@/http/axios'
-const utilisateur = ref<Utilisateur>(new Utilisateur(null))
+import { requiredRule } from '@/composables/form/validationRoles'
 
+const utilisateur = ref<Utilisateur>(new Utilisateur(null))
 const utilisateurStore = useUtilisateurStore()
 
-let loginCredentials = {
+const loginCredentials = {
     username: '',
     password: ''
 }
+
+const visiblePassword = ref(false)
 
 let login = async (credentials) => {
     return axios
@@ -33,6 +32,7 @@ let login = async (credentials) => {
 }
 
 const formSubmitted = (utilisateur: Utilisateur) => {
+    console.log(utilisateur)
     loginCredentials.username = utilisateur.email
     loginCredentials.password = utilisateur.password
 
@@ -41,35 +41,55 @@ const formSubmitted = (utilisateur: Utilisateur) => {
 </script>
 
 <template>
-    <div class="vh-100 flex flex-column align-items-center justify-content-center">
-        <div class="container flex flex-column align-items-center justify-content-center">
+    <div class="d-flex align-center justify-center" style="height: 100vh">
+        <v-col
+            cols="12"
+            xs="12"
+            sm="10"
+            md="6"
+            lg="3"
+        >
             <img
+                class="mb-15 mr-7"
                 src="@/images/dg-web-animated.svg"
-                alt="dg-web"
-                class="img-fluid mb-7 mr-9"
-                :style="{ maxWidth: '700px' }"
+                min-width="600px"
+                alt="dg web"
             >
-        </div>
-        <div class="container col-12 col-md-4 col-xl-3 flex flex-column">
-            <FormComponent
-                @submit="formSubmitted(utilisateur)" submit-label="Connexion"
-                :isSubmitKeyUpEnter="true"
-            >
-                <FormGroupComponent>
-                    <EmailComponent
-                        class="text-center"
+                <v-form @submit.prevent="formSubmitted(utilisateur)">
+                    <v-text-field
+                        variant="outlined"
+                        :rules="[(v) => requiredRule(v)]"
                         v-model="utilisateur.email"
-                        label="Email"
-                        span="12"
-                    />
-                    <PasswordComponent
-                        class="text-center"
+                        class="mb-2"
+                        label="Nom d'utilisateur"
+                        placeholder="Entrer le nom d'utilisateur"
+                        clearable
+                    ></v-text-field>
+
+                    <v-text-field
+                        variant="outlined"
+                        :rules="[(v) => requiredRule(v)]"
                         v-model="utilisateur.password"
                         label="Mot de passe"
-                        span="12"
-                    />
-                </FormGroupComponent>
-            </FormComponent>
-        </div>
+                        placeholder="Entrer le mot de passe"
+                        :type="visiblePassword ? 'text' : 'password'"
+                        :append-inner-icon="visiblePassword ? 'mdi-eye-off' : 'mdi-eye'"
+                        @click:append-inner="visiblePassword = !visiblePassword"
+                        clearable
+                    ></v-text-field>
+
+                    <br>
+
+                    <v-btn
+                        color="black"
+                        size="large"
+                        type="submit"
+                        variant="elevated"
+                        block
+                    >
+                        Se connecter
+                    </v-btn>
+                </v-form>
+        </v-col>
     </div>
 </template>

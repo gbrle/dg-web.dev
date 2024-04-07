@@ -1,9 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
- .scrollbar__thumb {
+.scrollbar__thumb {
      background-color: #AF5A47!important;
      width: 7px!important;
      border-radius: 0!important;
  }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
