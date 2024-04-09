@@ -10,7 +10,7 @@ const utilisateurStore = useUtilisateurStore()
     <div v-if="!utilisateurStore.isConnected">
         <ConnexionView />
     </div>
-    <div v-if="utilisateurStore.isConnected" class="flex-row mh-100">
+    <div v-if="utilisateurStore.isConnected">
         <DashBoardView />
     </div>
 </template>

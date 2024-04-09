@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from "@/views/Home.vue";
 import ConnexionView from "@/views/ConnexionView.vue";
 import DailyStandUpNoteCreationView from "@/views/DailyStandUpNote/DailyStandUpNoteCreationView.vue";
+import DailyStandUpNoteListeView from "@/views/DailyStandUpNote/DailyStandUpNoteListeView.vue";
 import UtilisateurCreationView from "@/views/Utilisateur/UtilisateurCreationView.vue";
 import UtilisateurListeView  from "@/views/Utilisateur/UtilisateurListeView.vue";
 import DashBoardView from "@/views/DashBoardView.vue";
@@ -32,6 +33,12 @@ const router = createRouter({
             path: '/daily-stand-up-note/creation',
             name: 'daily-stand-up-note-creation',
             component: DailyStandUpNoteCreationView,
+            meta: { requiresAuth: true }
+        },
+        {
+            path: '/daily-stand-up-note/liste',
+            name: 'daily-stand-up-note-liste',
+            component: DailyStandUpNoteListeView,
             meta: { requiresAuth: true }
         },
         {

@@ -1,19 +1,17 @@
 <script setup lang="ts">
-import {onMounted, ref} from 'vue'
-import FormComponent from '@/components/form/FormComponent.vue'
+import { ref } from 'vue'
 import { Utilisateur } from '@/model/utilisateur'
 import { type Errors } from '@/model/errors'
-
 import { createUtilisateur } from '@/http/request/utilisateur'
 import router from '@/router'
 import { toast } from 'vue3-toastify'
-import FormGroupComponent from '@/components/form/FormGroupComponent.vue'
-import FormSectionTitleComponent from '@/components/form/FormSectionTitleComponent.vue'
-import InputComponent from "@/components/form/InputComponent.vue";
-import SelectComponent from "@/components/form/SelectComponent.vue";
 
 const utilisateur = ref<Utilisateur>(new Utilisateur(null))
-import { RolesLibelle } from '@/model/enum/utilisateur/role'
+const visiblePassword = ref(false)
+import { requiredRule } from "@/composables/form/validationRoles";
+import { rolesForSelect } from "@/model/enum/utilisateur/role";
+import FormSectionTitleComponent from "@/components/form/FormSectionTitleComponent.vue";
+import SubmitButtonComponent from "@/components/form/SubmitButtonComponent.vue";
 const errors = ref<Errors>({})
 
 const formSubmitted = () => {
@@ -34,33 +32,56 @@ const formSubmitted = () => {
 
 </script>
 <template>
-    <FormComponent @submit="formSubmitted" submit-label="Créer l'utilisateur">
-        <FormSectionTitleComponent title="Création d'un utilisateur" />
-        <FormGroupComponent>
-            <InputComponent
-                v-model="utilisateur.email"
-                :errors="errors.email"
-                label="Pseudo"
-                span="4"
-            />
-            <InputComponent
-                v-model="utilisateur.password"
-                :errors="errors.password"
-                label="Mot de passe"
-                span="4"
-            />
-            <SelectComponent
-                v-model="utilisateur.role"
-                :errors="errors.role"
-                label="Role"
-                span="3"
-                :choicesEnum="RolesLibelle"
-            />
-            <v-select
-                label="Select"
-                :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
-            ></v-select>
-            <v-icon>mdi-home</v-icon>
-        </FormGroupComponent>
-    </FormComponent>
+    <FormSectionTitleComponent title="Créer un utilisateur"></FormSectionTitleComponent>
+    <v-form @submit.prevent="formSubmitted(utilisateur)">
+        <v-row>
+            <v-col
+                cols="12"
+                md="4"
+            >
+                <v-text-field
+                    class="col-3"
+                    variant="outlined"
+                    :rules="[(v) => requiredRule(v)]"
+                    v-model="utilisateur.email"
+                    label="Nom d'utilisateur"
+                    placeholder="Entrer le nom de l'utilisateur"
+                    clearable
+                ></v-text-field>
+            </v-col>
+            <v-col
+                cols="12"
+                md="4"
+            >
+                <v-text-field
+                    variant="outlined"
+                    :rules="[(v) => requiredRule(v)]"
+                    v-model="utilisateur.password"
+                    label="Mot de passe"
+                    placeholder="Entrer le mot de passe"
+                    :type="visiblePassword ? 'text' : 'password'"
+                    :append-inner-icon="visiblePassword ? 'mdi-eye-off' : 'mdi-eye'"
+                    @click:append-inner="visiblePassword = !visiblePassword"
+                    clearable
+                ></v-text-field>
+            </v-col>
+            <v-col
+                cols="12"
+                md="4"
+            >
+                <v-select
+                    variant="outlined"
+                    v-model="utilisateur.role"
+                    :rules="[(v) => requiredRule(v)]"
+                    label="Role"
+                    :items="rolesForSelect.items"
+                    item-title="libelle"
+                    item-value="value"
+                    clearable
+                ></v-select>
+            </v-col>
+        </v-row>
+
+        <SubmitButtonComponent></SubmitButtonComponent>
+    </v-form>
 </template>

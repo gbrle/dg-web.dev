@@ -32,7 +32,6 @@ let login = async (credentials) => {
 }
 
 const formSubmitted = (utilisateur: Utilisateur) => {
-    console.log(utilisateur)
     loginCredentials.username = utilisateur.email
     loginCredentials.password = utilisateur.password
 
@@ -50,9 +49,8 @@ const formSubmitted = (utilisateur: Utilisateur) => {
             lg="3"
         >
             <img
-                class="mb-15 mr-7"
-                src="@/images/dg-web-animated.svg"
-                min-width="600px"
+                class="mb-15 w-100"
+                src="@/images/dg-web-logo.svg"
                 alt="dg web"
             >
                 <v-form @submit.prevent="formSubmitted(utilisateur)">

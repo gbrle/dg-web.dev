@@ -2,7 +2,9 @@
 
 namespace App\Component\Metadata;
 
+use App\Entity\Utilisateur;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 trait Metadata
 {
@@ -14,6 +16,18 @@ trait Metadata
 
     #[ORM\Column(type: 'datetime', nullable: true)]
     protected ?\DateTimeInterface $deletedAt = null;
+
+    #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
+    #[ORM\JoinColumn(name: 'created_by', referencedColumnName: 'id')]
+    protected ?UserInterface $createdBy = null;
+
+    #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
+    #[ORM\JoinColumn(name: 'updated_by', referencedColumnName: 'id')]
+    protected ?UserInterface $updatedBy = null;
+
+    #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
+    #[ORM\JoinColumn(name: 'deleted_by', referencedColumnName: 'id')]
+    protected ?UserInterface $deletedBy = null;
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
@@ -51,11 +65,50 @@ trait Metadata
         return $this;
     }
 
+    public function getCreatedBy(): ?UserInterface
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(UserInterface $utilisateur): self
+    {
+        $this->createdBy = $utilisateur;
+
+        return $this;
+    }
+
+    public function getUpdatedBy(): ?UserInterface
+    {
+        return $this->updatedBy;
+    }
+
+    public function setUpdatedBy(UserInterface $utilisateur): self
+    {
+        $this->updatedBy = $utilisateur;
+
+        return $this;
+    }
+
+    public function getDeletedBy(): ?UserInterface
+    {
+        return $this->deletedBy;
+    }
+
+    public function setDeletedBy(UserInterface $utilisateur): self
+    {
+        $this->deletedBy = $utilisateur;
+
+        return $this;
+    }
+
     public function populateMetadata(MetadataInterface $metadataClass): self
     {
         $this->createdAt = $metadataClass->getCreatedAt();
         $this->updatedAt = $metadataClass->getUpdatedAt();
         $this->deletedAt = $metadataClass->getDeletedAt();
+        $this->createdBy = $metadataClass->getCreatedBy();
+        $this->updatedBy = $metadataClass->getUpdatedBy();
+        $this->deletedBy = $metadataClass->getDeletedBy();
 
         return $this;
     }

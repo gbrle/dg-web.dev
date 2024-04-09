@@ -5,17 +5,33 @@ import { Utilisateur } from '@/model/utilisateur'
 import { type Errors } from '@/model/errors'
 import { getUtilisateurs, patchUtilisateur } from '@/http/request/utilisateur'
 import type { Header } from 'vue3-easy-data-table'
-import SelectComponent from '@/components/form/SelectComponent.vue'
-import { RolesLibelle } from '@/model/enum/utilisateur/role'
+import { rolesForSelect } from '@/model/enum/utilisateur/role'
 import { toast } from 'vue3-toastify'
+import FormSectionTitleComponent from "@/components/form/FormSectionTitleComponent.vue";
 
-const utilisateurs = ref<Array<Utilisateur>>([])
 const errors = ref<Errors>({})
+
+const search = ref('')
 const headers: Header[] = [
-    { text: 'Email', value: 'email' },
-    { text: 'Rôle', value: 'role' },
-    { text: 'Action', value: '' }
+    {
+        align: 'start',
+        key: 'email',
+        sortable: true,
+        title: 'Nom d\'utilisateur',
+    },
+    {
+        key: 'role',
+        title: 'Role',
+        sortable: false,
+    },
+    {
+        align: 'end',
+        key: 'actions',
+        sortable: false,
+        title: 'Action'
+    },
 ]
+const utilisateurs = ref<Array<Utilisateur>>([])
 
 onMounted(() => {
     getUtilisateurs().then((utilisateurResponse: Array<Utilisateur>) => {
@@ -35,26 +51,35 @@ const updateUtilisateur = (item: Utilisateur) => {
 }
 </script>
 <template>
-    <EasyDataTable
-        :headers="headers"
-        :items="utilisateurs"
-        alternating
-        rows-per-page-message="Utilisateurs par page"
-        rows-of-page-separator-message="sur"
-        :sort-by="['email']"
-        :sort-type="['asc']"
-    >
-        <template #item-email="item"> {{ item.email }} </template>
-        <template #item-role="item">
-            <SelectComponent
-                class="w-3/6"
-                v-model="item.role"
-                :errors="errors.role"
-                :choicesEnum="RolesLibelle"
-                @change="updateUtilisateur(item)"
-                span="2"
-                :clearable="false"
-            />
+    <FormSectionTitleComponent title="Liste des utilisateurs" />
+    <v-card flat>
+        <template v-slot:text>
+            <v-text-field
+                v-model="search"
+                label="Rechercher"
+                prepend-inner-icon="mdi-magnify"
+                variant="outlined"
+                hide-details
+                clearable
+                single-line
+            ></v-text-field>
         </template>
-    </EasyDataTable>
+
+        <v-data-table
+            :headers="headers"
+            :items="utilisateurs"
+            :search="search"
+        >
+            <template v-slot:item.role="{ item }">
+            <v-select
+                variant="underlined"
+                v-model="item.role"
+                :items="rolesForSelect.items"
+                item-title="libelle"
+                item-value="value"
+                @update:modelValue="updateUtilisateur(item)"
+            ></v-select>
+            </template>
+        </v-data-table>
+    </v-card>
 </template>
