@@ -14,6 +14,7 @@ import 'vue3-easy-data-table/dist/style.css';
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
+import CKEditor from '@ckeditor/ckeditor5-vue';
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import colors from 'vuetify/util/colors'
@@ -42,6 +43,7 @@ const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 app.use(pinia)
 app.use(vuetify)
+app.use(CKEditor);
 app.use(router);
 app.use(Vue3Toastify, {
     autoClose: 3000
