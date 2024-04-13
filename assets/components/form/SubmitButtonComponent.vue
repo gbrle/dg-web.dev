@@ -1,5 +1,7 @@
 <script setup lang="ts">
-
+const props = defineProps<{
+    disabledSubmitButton: Boolean,
+}>()
 </script>
 
 <template>
@@ -12,6 +14,7 @@
             offset-md="9"
         >
             <v-btn
+                :disabled="disabledSubmitButton"
                 class="mt-12"
                 color="primary"
                 size="large"

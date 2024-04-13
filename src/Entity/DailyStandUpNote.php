@@ -7,6 +7,7 @@ use App\Component\Metadata\MetadataInterface;
 use App\Repository\DailyStandUpNoteRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: DailyStandUpNoteRepository::class)]
 class DailyStandUpNote implements MetadataInterface
@@ -15,12 +16,15 @@ class DailyStandUpNote implements MetadataInterface
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
+    #[Groups(['read'])]
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups(['read'])]
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+    #[Groups(['read'])]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
 

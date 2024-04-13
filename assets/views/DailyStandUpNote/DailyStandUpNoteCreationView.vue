@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted, ref} from 'vue'
+import {onMounted, ref, watch} from 'vue'
 import { DailyStandUpNote } from '@/model/dailyStandUpNote'
 import { type Errors } from '@/model/errors'
 
@@ -13,8 +13,13 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const dailyStandUpNote = ref<DailyStandUpNote>(new DailyStandUpNote(null))
 const errors = ref<Errors>({})
-
 const editor = ref(ClassicEditor)
+const editorConfig = ref(null)
+const disabledSubmitButton = ref(true)
+
+watch(() => dailyStandUpNote.value.content, (newValue) => {
+    disabledSubmitButton.value = newValue === '';
+});
 
 onMounted(() => {
     const currentDate = new Date();
@@ -48,38 +53,36 @@ const formSubmitted = () => {
                 cols="12"
             >
                 <v-text-field
+                    :style="{ fontWeight: 700, opacity: 1 + '!important' }"
                     variant="outlined"
                     :rules="[(v) => requiredRule(v)]"
                     v-model="dailyStandUpNote.title"
-                    label="Titre"
+                    label="Date"
                     placeholder="Entrer le titre de la note"
                     disabled
-                    clearable
                 ></v-text-field>
             </v-col>
-<!--            <v-col-->
-<!--                cols="12"-->
-<!--            >-->
-<!--                <v-textarea-->
-<!--                    variant="outlined"-->
-<!--                    :rules="[(v) => requiredRule(v)]"-->
-<!--                    v-model="dailyStandUpNote.content"-->
-<!--                    label="Description"-->
-<!--                    placeholder="Description de la note"-->
-<!--                    clearable-->
-<!--                ></v-textarea>-->
-<!--            </v-col>-->
         </v-row>
-        <ckeditor :editor="editor"
-                  v-model="dailyStandUpNote.content"
-                  :config="editorConfig"
+        <ckeditor
+            :editor="editor"
+            v-model="dailyStandUpNote.content"
+            :config="editorConfig"
         ></ckeditor>
-        <SubmitButtonComponent></SubmitButtonComponent>
+        <SubmitButtonComponent :disabled-submit-button="disabledSubmitButton"></SubmitButtonComponent>
     </v-form>
 </template>
 
 <style>
 .ck.ck-balloon-panel.ck-powered-by-balloon[class*=position_border] {
     display: none!important;
+}
+.ck.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-focused {
+    border-color: #b55a45!important;
+}
+.ck.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {
+    height: 300px!important;
+}
+.v-field--disabled {
+    opacity: 1!important;
 }
 </style>
