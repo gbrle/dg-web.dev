@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import {inject} from "vue";
+import { inject } from "vue";
 
 const $isMobile = inject('$isMobile');
 
 import TopBarComponent from "@/components/topBar/TopBarComponent.vue";
 import SideBarItemsComponent from "@/components/sideBar/SideBarItemsComponent.vue";
-import {logout} from "@/http/request/utilisateur";
+import { logout } from "@/http/request/utilisateur";
 
 </script>
 

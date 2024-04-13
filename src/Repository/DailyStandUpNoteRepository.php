@@ -28,13 +28,19 @@ class DailyStandUpNoteRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('dsn');
         $qb->andWhere('dsn.createdBy = :createdBy')
             ->setParameter('createdBy', $user);
-
+        $qb->orderBy('dsn.createdAt', 'DESC');
         return $qb->getQuery()->getResult();
     }
 
     public function save(DailyStandUpNote $dailyStandUpNote): void
     {
         $this->_em->persist($dailyStandUpNote);
+        $this->_em->flush();
+    }
+
+    public function delete(DailyStandUpNote $dailyStandUpNote): void
+    {
+        $this->_em->remove($dailyStandUpNote);
         $this->_em->flush();
     }
 }

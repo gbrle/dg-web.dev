@@ -7,16 +7,6 @@ const open = ref(['Users'])
 </script>
 
 <template>
-    <v-list>
-        <v-list-item
-            prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
-            subtitle="sandra_a88@gmailcom"
-            title="Sandra Adams"
-        ></v-list-item>
-    </v-list>
-
-    <v-divider></v-divider>
-
     <v-list v-model:opened="open" >
         <!-- Daily standUp Note -->
         <v-list-group value="Daily standUp Note">

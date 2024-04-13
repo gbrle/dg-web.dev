@@ -2,6 +2,7 @@
 
 namespace App\Controller\api;
 
+use App\Entity\DailyStandUpNote;
 use App\Form\DailyStandUpNote\CreateDailyStandUpNoteFormType;
 use App\Manager\DailyStandUpNoteManager;
 use App\Response\FormErrorResponse;
@@ -42,6 +43,14 @@ DailyStandUpNoteController extends AbstractController
         }
 
         $dailyStandUpNote = $this->dailyStandUpNoteManager->createDailyStandUpNote($form->getData());
+
+        return new Response($this->jsonSerializer->serialize($dailyStandUpNote));
+    }
+
+    #[Route('/daily-stand-up-notes/{id}', name: 'delete_daily_stand_up_note', methods: ['delete'])]
+    public function deleteDailyStandupNote(DailyStandUpNote $dailyStandUpNote): Response
+    {
+        $this->dailyStandUpNoteManager->deleteDailyStandUpNote($dailyStandUpNote, $this->getUser());
 
         return new Response($this->jsonSerializer->serialize($dailyStandUpNote));
     }

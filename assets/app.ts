@@ -46,7 +46,11 @@ app.use(vuetify)
 app.use(CKEditor);
 app.use(router);
 app.use(Vue3Toastify, {
-    autoClose: 3000
+    limit: 5,
+    autoClose: 3500,
+    theme: 'colored',
+    newestOnTop: true,
+    clearOnUrlChange: false
 } as any)
 app.mount('#vue-app');
 app.component(CustomScrollbar.name, CustomScrollbar);

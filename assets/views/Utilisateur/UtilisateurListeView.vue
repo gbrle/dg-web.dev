@@ -8,8 +8,10 @@ import type { Header } from 'vue3-easy-data-table'
 import { rolesForSelect } from '@/model/enum/utilisateur/role'
 import { toast } from 'vue3-toastify'
 import FormSectionTitleComponent from "@/components/form/FormSectionTitleComponent.vue";
+import LoaderComponent from "@/components/loader/LoaderComponent.vue";
 
 const errors = ref<Errors>({})
+const isLoading = ref(true);
 
 const search = ref('')
 const headers: Header[] = [
@@ -36,6 +38,8 @@ const utilisateurs = ref<Array<Utilisateur>>([])
 onMounted(() => {
     getUtilisateurs().then((utilisateurResponse: Array<Utilisateur>) => {
         utilisateurs.value = utilisateurResponse
+    }).finally(() => {
+        isLoading.value = false;
     })
 })
 const updateUtilisateur = (item: Utilisateur) => {
@@ -51,35 +55,40 @@ const updateUtilisateur = (item: Utilisateur) => {
 }
 </script>
 <template>
-    <FormSectionTitleComponent title="Liste des utilisateurs" />
-    <v-card flat>
-        <template v-slot:text>
-            <v-text-field
-                v-model="search"
-                label="Rechercher"
-                prepend-inner-icon="mdi-magnify"
-                variant="outlined"
-                hide-details
-                clearable
-                single-line
-            ></v-text-field>
-        </template>
-
-        <v-data-table
-            :headers="headers"
-            :items="utilisateurs"
-            :search="search"
-        >
-            <template v-slot:item.role="{ item }">
-            <v-select
-                variant="underlined"
-                v-model="item.role"
-                :items="rolesForSelect.items"
-                item-title="libelle"
-                item-value="value"
-                @update:modelValue="updateUtilisateur(item)"
-            ></v-select>
+    <div v-if="isLoading">
+        <LoaderComponent />
+    </div>
+    <div v-else>
+        <FormSectionTitleComponent title="Liste des utilisateurs" />
+        <v-card flat>
+            <template v-slot:text>
+                <v-text-field
+                    v-model="search"
+                    label="Rechercher"
+                    prepend-inner-icon="mdi-magnify"
+                    variant="outlined"
+                    hide-details
+                    clearable
+                    single-line
+                ></v-text-field>
             </template>
-        </v-data-table>
-    </v-card>
+
+            <v-data-table
+                :headers="headers"
+                :items="utilisateurs"
+                :search="search"
+            >
+                <template v-slot:item.role="{ item }">
+                <v-select
+                    variant="underlined"
+                    v-model="item.role"
+                    :items="rolesForSelect.items"
+                    item-title="libelle"
+                    item-value="value"
+                    @update:modelValue="updateUtilisateur(item)"
+                ></v-select>
+                </template>
+            </v-data-table>
+        </v-card>
+    </div>
 </template>

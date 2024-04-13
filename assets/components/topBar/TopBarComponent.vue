@@ -22,7 +22,6 @@ import fullLogo from '@/images/dg-web-logo.svg'
 <style scoped>
 .system-bar-container {
     background-color: #ffffff;
-    background-image: url('@/images/fond-dg-web.svg');
     background-size: auto 100%;
     background-repeat: no-repeat;
 }

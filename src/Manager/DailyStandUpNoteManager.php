@@ -26,4 +26,15 @@ class DailyStandUpNoteManager
 
         return $dailyStandUpNote;
     }
+
+    public function deleteDailyStandUpNote(DailyStandUpNote $dailyStandUpNote, UserInterface $user): DailyStandUpNote
+    {
+        if ($dailyStandUpNote->getCreatedBy() !== $user) {
+            throw new \InvalidArgumentException('Vous ne pouvez pas supprimer une note que vous n\'avez pas créée.');
+        }
+
+        $this->dailyStandUpNoteRepository->delete($dailyStandUpNote);
+
+        return $dailyStandUpNote;
+    }
 }

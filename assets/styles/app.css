@@ -10,3 +10,16 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active{
     -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
+
+ .ck.ck-balloon-panel.ck-powered-by-balloon[class*=position_border] {
+     display: none!important;
+ }
+.ck.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-focused {
+    border-color: #b55a45!important;
+}
+.ck.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {
+    height: 300px!important;
+}
+.v-field--disabled {
+    opacity: 1!important;
+}

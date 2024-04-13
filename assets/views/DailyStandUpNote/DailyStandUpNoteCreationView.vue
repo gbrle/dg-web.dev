@@ -30,15 +30,11 @@ onMounted(() => {
 })
 
 const formSubmitted = () => {
+    disabledSubmitButton.value = true
     createDailyStandUpNote(dailyStandUpNote.value)
-        .then((dailyStandUpNoteResponse: DailyStandUpNote) => {
+        .then(() => {
+            router.push({ name: 'daily-stand-up-note-liste' })
             toast.success('La note a été créé.')
-
-            setTimeout(
-                () =>
-                    router.push({ name: 'daily-stand-up-note-edition', params: { dailyStandUpNoteId: dailyStandUpNoteResponse.id } }),
-                2000
-            )
         })
         .catch((errorsResponse) => {
             errors.value = errorsResponse
@@ -71,18 +67,3 @@ const formSubmitted = () => {
         <SubmitButtonComponent :disabled-submit-button="disabledSubmitButton"></SubmitButtonComponent>
     </v-form>
 </template>
-
-<style>
-.ck.ck-balloon-panel.ck-powered-by-balloon[class*=position_border] {
-    display: none!important;
-}
-.ck.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-focused {
-    border-color: #b55a45!important;
-}
-.ck.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {
-    height: 300px!important;
-}
-.v-field--disabled {
-    opacity: 1!important;
-}
-</style>
